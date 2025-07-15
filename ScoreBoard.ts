@@ -18,4 +18,9 @@ export class ScoreBoard {
         const match = this.matchesList.find(el => el.id === id);
         if (match) match.scoreUpdate(homeTeamScore, awayTeamScore);
     }
+
+    finishMatch(id: string) {
+        const index = this.matchesList.findIndex(el => el.id === id);
+        if (index !== -1) this.matchesList.splice(index, 1);
+    }
 }
