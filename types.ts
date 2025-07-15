@@ -4,4 +4,5 @@ export interface IMatch {
     awayTeam: string;
     homeTeamScore: number;
     awayTeamScore: number;
+    scoreUpdate(homeTeamScore: number, awayTeamScore: number): void;
 }

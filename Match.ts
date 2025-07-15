@@ -1,6 +1,6 @@
 import type { IMatch } from './types';
 
-class Match implements IMatch {
+export class Match implements IMatch {
     public id: string;
     public homeTeam: string;
     public awayTeam: string;
@@ -14,6 +14,10 @@ class Match implements IMatch {
         this.homeTeamScore = 0;
         this.awayTeamScore = 0;
     }
-}
 
-module.exports = { Match };
+      
+    scoreUpdate(homeTeamScore: number, awayTeamScore: number) {
+        this.homeTeamScore = homeTeamScore;
+        this.awayTeamScore = awayTeamScore;
+      }
+}
