@@ -9,6 +9,9 @@ export class Match implements IMatch {
     public startMatchTime: number;
 
     constructor (homeTeam: string, awayTeam: string) {
+        if (homeTeam === awayTeam) throw new Error('homeTeam and awayTeam can not be the same.');
+        if (!homeTeam || !awayTeam) throw new Error('Plaese add homeTeam and awayTeam.');
+    
         this.id = `${homeTeam}-${awayTeam}`
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
@@ -18,6 +21,16 @@ export class Match implements IMatch {
     }
 
     scoreUpdate(homeTeamScore: number, awayTeamScore: number) {
+        if (
+            typeof homeTeamScore !== 'number' || typeof awayTeamScore !== 'number'
+          ) {
+            throw new Error('Please provide a numeric score value.');
+          }
+          if (
+            homeTeamScore < 0 || awayTeamScore < 0
+          ) {
+            throw new Error('Please provide a positive score value.');
+          }
         this.homeTeamScore = homeTeamScore;
         this.awayTeamScore = awayTeamScore;
     }

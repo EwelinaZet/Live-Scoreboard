@@ -9,6 +9,11 @@ export class ScoreBoard {
     }
 
     matchStart(homeTeam: string, awayTeam: string) {
+        if (this.matchesList.some(
+            el => el.homeTeam === homeTeam && el.awayTeam === awayTeam
+        )) {
+            throw new Error('Match already exist.');
+        }
         const match = new Match(homeTeam, awayTeam);
         this.matchesList.push(match);
         return match.id;
@@ -17,11 +22,13 @@ export class ScoreBoard {
     scoreUpdate(id: string, homeTeamScore: number, awayTeamScore:number) {
         const match = this.matchesList.find(el => el.id === id);
         if (match) match.scoreUpdate(homeTeamScore, awayTeamScore);
+        else throw new Error('Match not exist.');
     }
 
     finishMatch(id: string) {
         const index = this.matchesList.findIndex(el => el.id === id);
         if (index !== -1) this.matchesList.splice(index, 1);
+        else throw new Error('Match not exist.');
     }
 
     matchesSummary() {
