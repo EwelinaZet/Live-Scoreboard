@@ -23,4 +23,20 @@ export class ScoreBoard {
         const index = this.matchesList.findIndex(el => el.id === id);
         if (index !== -1) this.matchesList.splice(index, 1);
     }
+
+    matchesSummary() {
+        return [...this.matchesList]
+          .sort((a, b) => {
+            const scoreA = a.countTotalScore();
+            const scoreB = b.countTotalScore();
+            if (scoreA !== scoreB) return scoreB - scoreA;
+            return b.startMatchTime - a.startMatchTime;
+          })
+          .map(m => ({
+            homeTeam: m.homeTeam,
+            homeScore: m.homeTeamScore,
+            awayTeam: m.awayTeam,
+            awayScore: m.awayTeamScore,
+          }));
+      }
 }
